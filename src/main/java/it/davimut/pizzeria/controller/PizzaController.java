@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/pizzeria")
 public class PizzaController {
 	@Autowired
-	private OffertaRepo offertaRepository ;
+	private OffertaRepo offertaRepo ;
 	@Autowired
 	private PizzaRepository pizzaRepo;
 	
@@ -42,7 +42,7 @@ public class PizzaController {
 }
    @GetMapping("/dettaglio/{id}")
    public String dettaglioPizza (@PathVariable("id") Integer id, Model model) {
-	 model.addAttribute("dettaglio", pizzaRepo.getReferenceById(id));
+	 model.addAttribute("pizza", pizzaRepo.getReferenceById(id));
      return "pizzeria/dettaglio";
 }
    @GetMapping("/create")
@@ -121,7 +121,7 @@ public class PizzaController {
 			return "/offerte/edit";
 		
 	}
-		offertaRepository.save(offerta);
+		offertaRepo.save(offerta);
 		return "redirect:/pizzeria/dettaglio/" + offerta.getPizza().getId();
 }}
 

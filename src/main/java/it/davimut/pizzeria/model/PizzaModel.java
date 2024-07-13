@@ -38,10 +38,6 @@ public class PizzaModel {
 	@Column(name = "price", nullable = true )
     private double price;
     
-   
-
-
-
 
 	@OneToMany(mappedBy = "pizza")
 	private List<OffertaModel> offerte;

@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/offerte")
 public class OffertaController {
 	@Autowired
-	private   OffertaRepo OffertaRepository;
+	private   OffertaRepo OffertaRepo;
 
 	@PostMapping("/create")
 	public String store(
@@ -29,7 +29,7 @@ public class OffertaController {
 		}
 		
 		
-		OffertaRepository.save(offerta);
+		OffertaRepo.save(offerta);
 		
 		return "redirect:/pizzeria/dettaglio/" + offerta.getPizza().getId();
 	}
