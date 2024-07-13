@@ -1,5 +1,7 @@
 package it.davimut.pizzeria.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import it.davimut.pizzeria.model.OffertaModel;
 import it.davimut.pizzeria.model.PizzaModel;
+import it.davimut.pizzeria.repository.OffertaRepo;
 import it.davimut.pizzeria.repository.PizzaRepository;
 import jakarta.validation.Valid;
 
@@ -23,11 +27,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-
 @Controller
 @RequestMapping("/pizzeria")
 public class PizzaController {
-
+	@Autowired
+	private OffertaRepo offertaRepository ;
 	@Autowired
 	private PizzaRepository pizzaRepo;
 	
@@ -93,6 +97,32 @@ public class PizzaController {
 		
 		return "redirect:/pizzeria/menu";
 	}
-}
+	@GetMapping("/{id}/offerta")
+	public String offerta(@PathVariable("id") Integer id, Model model) {
+		
+		PizzaModel pizza =  pizzaRepo.getReferenceById(id);
+		OffertaModel offerta = new OffertaModel();
+		offerta.setOffertaDate(LocalDateTime.now());
+		offerta.setPizza(pizza);
+		
+		model.addAttribute("offerta", offerta);
+		
+		return "offerte/edit";
+	}
+	
+	@PostMapping("/offerte/create")
+	public String store(
+			@Valid @ModelAttribute("offerta") OffertaModel offerta,
+			BindingResult bindingResult,
+			Model model) {
+		
+		if(bindingResult.hasErrors()) {
+		
+			return "/offerte/edit";
+		
+	}
+		offertaRepository.save(offerta);
+		return "redirect:/pizzeria/dettaglio/" + offerta.getPizza().getId();
+}}
 
 

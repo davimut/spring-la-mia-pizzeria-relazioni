@@ -1,10 +1,13 @@
 package it.davimut.pizzeria.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,7 +39,12 @@ public class PizzaModel {
     private double price;
     
    
-   
+
+
+
+
+	@OneToMany(mappedBy = "pizza")
+	private List<OffertaModel> offerte;
     
     
     
@@ -80,7 +88,13 @@ public class PizzaModel {
 		this.price = price;
 	}
 
+	public List<OffertaModel> getOfferte() {
+		return offerte;
+	}
 
+	public void setOfferte(List<OffertaModel> offerte) {
+		this.offerte = offerte;
+	}
 
 @Override
 	public String toString() {
