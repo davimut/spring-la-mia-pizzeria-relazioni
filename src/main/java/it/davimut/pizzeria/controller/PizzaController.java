@@ -1,6 +1,8 @@
 package it.davimut.pizzeria.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import it.davimut.pizzeria.model.IngredienteModel;
 import it.davimut.pizzeria.model.OffertaModel;
 import it.davimut.pizzeria.model.PizzaModel;
+import it.davimut.pizzeria.repository.IngredienteRepo;
 import it.davimut.pizzeria.repository.OffertaRepo;
 import it.davimut.pizzeria.repository.PizzaRepository;
 import jakarta.validation.Valid;
@@ -34,6 +38,9 @@ public class PizzaController {
 	private OffertaRepo offertaRepo ;
 	@Autowired
 	private PizzaRepository pizzaRepo;
+	@Autowired
+	private IngredienteRepo IngredienteRepo;
+	
 	
    @GetMapping("/menu")
    public String pizze (Model model) {
@@ -47,7 +54,9 @@ public class PizzaController {
 }
    @GetMapping("/create")
    public String create(Model model) {
+	   List<IngredienteModel> IngredientiList = IngredienteRepo.findAll();
 	   model.addAttribute("pizza",new PizzaModel());
+	   model.addAttribute("ingredienti",IngredientiList);
        return "/pizzeria/create";
    }
    
@@ -123,6 +132,7 @@ public class PizzaController {
 	}
 		offertaRepo.save(offerta);
 		return "redirect:/pizzeria/dettaglio/" + offerta.getPizza().getId();
-}}
+}
+}
 
 

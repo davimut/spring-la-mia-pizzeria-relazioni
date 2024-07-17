@@ -25,12 +25,19 @@
 	    .navbar-brand:hover, .nav-link:hover {
 	      color: #ffcc00 !important; /* Giallo chiaro */
 	    }
+		.bg-image {
+		    background-image: url('/img/2638221-pizza-4k-desktop-picture.jpg');
+		    background-size: cover;
+		    background-repeat: no-repeat;
+		    background-attachment: fixed;
+		    height: 100vh;
+		    width: 100%;}
 	</style>
 	</head>
 	
-	<body>
+	<body class="	bg-image">
 		<!-- Navbar -->
-		<nav class="navbar navbar-expand-lg navbar-dark">
+		<nav class="navbar navbar-expand-lg navbar-dark ">
 			<a class="navbar-brand ms-3" href="		http://localhost:8080/pizzeria/menu">Pizzeria</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,10 +55,10 @@
 				</ul>
 			</div>
 		</nav>
-		<div class="container">
-			<div class="row mt-5  justify-content-center">
-				<div class="col-7 ">
-					<h1 class="mb-5">Aggiungi una nuova pizza </h1>
+		<div class="container justify-content-start ms-5">
+			<div class="row mt-5 p-0 ">
+				<div class="col-6 ">
+					<h1 class="mb-5 mt-5">Aggiungi una nuova pizza </h1>
 					
 					<form id="form-pizza" th:action="@{/pizzeria/create}" method="post" th:object="${pizza}">
 						<div class="mb-3">
@@ -76,6 +83,13 @@
 											</li>
 										</ul>
 									</div>
+									<h6>Seleziona ingredienti</h6>								
+									<div class="mb-3">
+									<th:block  th:each"ingrediente : ${ingredienti}">
+									<input type="checkbox" name ="ingrediente"th:value="${ingrediente.id}"/>
+									<label th:text="${ingrediente.ingrediente}"></label>
+								</th:block>
+								</div>
 									</div>
 									
 									<button type="submit" class="btn btn-primary">Salva</button>
