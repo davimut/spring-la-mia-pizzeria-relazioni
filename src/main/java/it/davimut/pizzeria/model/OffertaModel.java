@@ -1,6 +1,5 @@
 package it.davimut.pizzeria.model;
 
-
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -14,27 +13,26 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name ="offerta")
+@Table(name = "offerta")
 public class OffertaModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NotNull
 	@Column(name = "offerta_date", nullable = false)
 	private LocalDateTime offertaDate;
-	
+
 	@Column(name = "return_date")
 	private LocalDateTime returnDate;
-	
+
 	private String titolo;
 
 	@ManyToOne
 	@JoinColumn(name = "pizza_id", nullable = false)
 	private PizzaModel pizza;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -73,6 +71,5 @@ public class OffertaModel {
 
 	public void setPizza(PizzaModel pizza) {
 		this.pizza = pizza;
-	}}
-
-	
+	}
+}

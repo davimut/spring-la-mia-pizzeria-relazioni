@@ -16,22 +16,18 @@ import jakarta.validation.Valid;
 @RequestMapping("/offerte")
 public class OffertaController {
 	@Autowired
-	private   OffertaRepo OffertaRepo;
+	private OffertaRepo OffertaRepo;
 
 	@PostMapping("/create")
-	public String store(
-			@Valid @ModelAttribute("offerta") OffertaModel offerta,
-			BindingResult bindingResult,
+	public String store(@Valid @ModelAttribute("offerta") OffertaModel offerta, BindingResult bindingResult,
 			Model model) {
-		
-		if(bindingResult.hasErrors()) {
+
+		if (bindingResult.hasErrors()) {
 			return "/offerte/edit";
 		}
-		
-		
+
 		OffertaRepo.save(offerta);
-		
+
 		return "redirect:/pizzeria/dettaglio/" + offerta.getPizza().getId();
 	}
 }
-
