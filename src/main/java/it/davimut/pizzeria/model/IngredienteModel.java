@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -19,7 +20,7 @@ public class IngredienteModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull (message = "ingredienti obbligatori")
+	@NotBlank (message = "ingredienti obbligatori")
 	@Column(name = "ingrediente", nullable = false)
 	private String ingrediente;
 	

@@ -29,6 +29,14 @@ public class PizzaModel {
 	@Column(name = "nome", nullable = false, unique = true)
 	private String nome;
 
+	public List<IngredienteModel> getIngredienti() {
+		return ingredienti;
+	}
+
+	public void setIngredienti(List<IngredienteModel> ingredienti) {
+		this.ingredienti = ingredienti;
+	}
+
 	@NotBlank(message = "la descrizione  della pizza è obbligatorio")
 	@Column(name = "descrizione", nullable = false)
 	private String descrizione;

@@ -53,6 +53,10 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active">
+					<a class="nav-link" href="http://localhost:8080/ingredienti">Ingredienti<span
+							class="sr-only"></span></a>
+				</li>
+				<li class="nav-item active">
 					<a class="nav-link" href="http://localhost:8080/pizzeria/menu">Menu <span
 							class="sr-only"></span></a>
 				</li>
@@ -90,11 +94,12 @@
 									Errore
 								</li>
 							</ul>
-						</div>S
+						</div>
 						<h6>Seleziona ingredienti</h6>
 						<div class="mb-3">
-							<th:block th:each"ingrediente : ${ingredienti}">
-								<input type="checkbox" name="ingrediente" th:value="${ingrediente.id}" />
+							<th:block th:each="ingrediente : ${ingredienti}">
+								<input type="checkbox" name="ingrediente" th:value="${ingrediente.id}"
+									th:field="*{ingredienti}" />
 								<label th:text="${ingrediente.ingrediente}"></label>
 							</th:block>
 						</div>
