@@ -30,29 +30,25 @@ public class IngredienteController {
 	
 	@PostMapping("/create")
 	public String store(
-			@Valid @ModelAttribute("ingrediente") IngredienteModel ingrediente,
-			BindingResult bindingResult,
-			Model model) {
-		
-		
-		if(ingrediente.getIngrediente() != null) {
-			IngredienteModel ingredienteFiltrato = 
-					IngredienteRepo.findByIngredienteIgnoreCase(ingrediente.getIngrediente());
-			if(ingredienteFiltrato != null) {
-				bindingResult.addError(new ObjectError("Errore di inserimento", 
-						"l'ingrediente inserito esiste già"));
-			}
-		}
-		
-		if(bindingResult.hasErrors()) {
-			model.addAttribute("listaIngredienti", IngredienteRepo.findAll());
-			model.addAttribute("ingrediente", new IngredienteModel());
-			return "/ingredienti/index";
-		}
-		
-		IngredienteRepo.save(ingrediente);
-		
-		return "redirect:/ingredienti";
+	        @Valid @ModelAttribute("ingrediente") IngredienteModel ingrediente,
+	        BindingResult bindingResult,
+	        Model model) {
+	    
+	    // Controlla se l'ingrediente è già presente nel database
+	    if (ingrediente.getIngrediente() != null) {
+	        IngredienteModel ingredienteFiltrato = IngredienteRepo.findByIngredienteIgnoreCase(ingrediente.getIngrediente());
+	        if (ingredienteFiltrato != null) {
+	            bindingResult.addError(new ObjectError("Errore di inserimento", "l'ingrediente inserito esiste già"));
+	        }
+	    }
+	    
+	    if (bindingResult.hasErrors()) {
+	        model.addAttribute("listaIngredienti", IngredienteRepo.findAll());
+	        return "/ingredienti/index";
+	    }
+	    
+	    IngredienteRepo.save(ingrediente);
+	    return "redirect:/ingredienti";
 	}
 
 	
