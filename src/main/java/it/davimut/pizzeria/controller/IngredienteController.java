@@ -35,8 +35,8 @@ public class IngredienteController {
 	        Model model) {
 	    
 	    // Controlla se l'ingrediente è già presente nel database
-	    if (ingrediente.getIngrediente() != null) {
-	        IngredienteModel ingredienteFiltrato = IngredienteRepo.findByIngredienteIgnoreCase(ingrediente.getIngrediente());
+	    if (ingrediente.getNome() != null) {
+	        IngredienteModel ingredienteFiltrato = IngredienteRepo.findByNomeIgnoreCase(ingrediente.getNome());
 	        if (ingredienteFiltrato != null) {
 	            bindingResult.addError(new ObjectError("Errore di inserimento", "l'ingrediente inserito esiste già"));
 	        }

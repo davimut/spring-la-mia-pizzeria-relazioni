@@ -22,7 +22,7 @@ public class IngredienteModel {
 	
 	@NotBlank (message = "ingredienti obbligatori")
 	@Column(name = "ingrediente", nullable = false)
-	private String ingrediente;
+	private String nome;
 	
 	@ManyToMany(mappedBy ="ingredienti")
 	private List<PizzaModel> pizze;
@@ -35,12 +35,12 @@ public class IngredienteModel {
 		this.id = id;
 	}
 
-	public String getIngrediente() {
-		return ingrediente;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setIngrediente(String ingrediente) {
-		this.ingrediente = ingrediente;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<PizzaModel> getPizze() {

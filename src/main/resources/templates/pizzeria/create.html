@@ -101,7 +101,7 @@
 							<th:block th:each="ingrediente : ${ingredienti}">
 								<input type="checkbox" name="ingrediente" th:value="${ingrediente.id}"
 									th:field="*{ingredienti}" />
-								<label th:text="${ingrediente.ingrediente}"></label>
+								<label th:text="${ingrediente.nome}"></label>
 							</th:block>
 						</div>
 					</div>

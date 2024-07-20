@@ -34,10 +34,10 @@ public class OffertaController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
-		
+     		
 		OffertaRepo.deleteById(id);
 		
 	
-		return "redirect:/pizzeria/dettaglio/";
+		return "redirect:/pizzeria/menu";
 }
 	}
